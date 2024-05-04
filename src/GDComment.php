@@ -77,7 +77,7 @@ class GDComment {
 		$comment = base64_encode($t);
 		$ch = curl_init ($this->host."/uploadGJAccComment20.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["userName" => $this->username, "gjp" => $this->gjp, "comment" => $comment, "accountID" => $this->accID, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["userName" => $this->username, "gjp" => $this->gjp, "comment" => $comment, "accountID" => $this->accID, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded", "x-forwarded-for: ". $this->getServerIp()]);
 		$res = curl_exec ($ch);
 		if ($res == "-1"){
@@ -108,7 +108,7 @@ class GDComment {
 		
 		$ch = curl_init ($this->host."/uploadGJComment21.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["userName" => $this->username, "gjp" => $this->gjp,"chk" => $chk, "accountID" => $this->accID, "gameVersion" => "22", "binaryVersion" => "35", "comment" => $comment, "levelID" => $levelID, "percent" => $percent, "secret" => $secret]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["userName" => $this->username, "gjp" => $this->gjp,"chk" => $chk, "accountID" => $this->accID, "gameVersion" => "22", "binaryVersion" => "35", "comment" => $comment, "levelID" => $levelID, "percent" => $percent, "secret" => $secret]));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded", "x-forwarded-for: ". $this->getServerIp()]);
 		if (curl_exec($ch) == "-1"){
 			include __DIR__."/Exception/GDErrors.php";
@@ -133,7 +133,7 @@ class GDComment {
 		$levelID = $i;
 		$ch = curl_init ($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["secret" => $secret, "levelID" => $levelID, "gameVersion" => "22", "binaryVersion" => "35", "mode" => $m, "page" => $c, "count" => 10]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["secret" => $secret, "levelID" => $levelID, "gameVersion" => "22", "binaryVersion" => "35", "mode" => $m, "page" => $c, "count" => 10]));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded", "x-forwarded-for: ". $this->getServerIp()]);
 		$arr = explode ("#", curl_exec ($ch))[0];
 		$arr = explode ("|", $arr);
@@ -216,7 +216,7 @@ class GDComment {
 		$userID = $this->usrID;
 		$page = $this->getPage ();
 		
-		$pst = ["gameVersion" => "22", "binaryVersion" => "35", "userID" => $userID, "total" => 10, "secret" => $secret, "mode" => $m, "page" => $page];
+		$pst = http_build_query(["gameVersion" => "22", "binaryVersion" => "35", "userID" => $userID, "total" => 10, "secret" => $secret, "mode" => $m, "page" => $page]);
 		
 		$ch = curl_init ($host);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded", "x-forwarded-for: ". $this->getServerIp()]);

@@ -19,7 +19,7 @@ class GDConfig {
 			$sid = mt_rand(111111111,999999999) . mt_rand(11111111,99999999);
 			curl_setopt ($ch, CURLOPT_URL, $this->host."/accounts/loginGJAccount.php");
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt ($ch, CURLOPT_POSTFIELDS, ["secret" => "Wmfv3899gc9", "userName" => $this->username, "password" => $this->password, "udid" => $udid, "sID" => $sid]);
+			curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["secret" => "Wmfv3899gc9", "userName" => $this->username, "password" => $this->password, "udid" => $udid, "sID" => $sid, "gameVersion" => '22', "binaryVersion" => '35']));
 			if (curl_exec($ch) == "-1"){
 				include __DIR__."/Exception/GDErrors.php";
 				$err = new GDErrors($this->host);
@@ -88,17 +88,19 @@ class GDConfig {
 		include __DIR__."/../config/config.php";
 		$url = $this->getAccountURL();
 		$url = $url."/database/accounts/syncGJAccountNew.php";
-		$postfields["gameVersion"] = $gameVersion; 
-		$postfields["binaryVersion"] = 35;
 		$postfields["userName"] = $this->username; 
 		$postfields["accountID"] = $this->accountID;
 		$postfields["password"] = $this->password;
 		$postfields["secret"] = "Wmfv3899gc9";
 		$postfields["gdw"] = 0;
+		$postfields["gameVersion"] = '22'
+		$postfields["binaryVersion"] = '35'
+
 		
 		$ch = curl_init ($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postfields);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($postfields));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$response = curl_exec ($ch);
 		file_put_contents ($p, explode (";", $response)[0]);
 		return $response;
@@ -107,8 +109,8 @@ class GDConfig {
 		include __DIR__."/../config/config.php";
 		$url = $this->getAccountURL();
 		$url = $url."/database/accounts/backupGJAccountNew.php";
-		$postfields["gameVersion"] = $gameVersion; 
-		$postfields["binaryVersion"] = 35;
+		$postfields["gameVersion"] = '22'
+		$postfields["binaryVersion"] = '35'
 		$postfields["userName"] = $this->username; 
 		$postfields["accountID"] = $this->accountID;
 		$postfields["password"] = $this->password;
@@ -118,7 +120,8 @@ class GDConfig {
 		
 		$ch = curl_init ($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postfields);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($postfields));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$response = curl_exec ($ch);
 		if ($response == "-1" || empty ($response)){
 			return "Upload Save Data Failed! / ". $response;
@@ -130,10 +133,12 @@ class GDConfig {
 		$postURL["accountID"] = $this->accountID;
 		$postURL["type"] = "2";
 		$postURL["secret"] = "Wmfd2893gb7";
+		
 			
 		$ch = curl_init ($this->host."/getAccountURL.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, $postURL);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($postURL));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$newHost = curl_exec ($ch);
 		curl_close ($ch);
 		return $newHost;
