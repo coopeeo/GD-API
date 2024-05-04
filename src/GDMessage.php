@@ -66,6 +66,7 @@ class GDMessage {
 		include __DIR__."/../config/config.php";
 		$this->username = $u;
 		$this->host = $h;
+		$this->host = str_replace("boomlings", "www.boomlings", $this->host);
 		self::$password = $p;
 		$gjp = $this->plaintext (self::$password, 37526);
 		$gp = base64_encode ($gjp);

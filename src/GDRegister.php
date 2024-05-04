@@ -2,6 +2,7 @@
 class GDRegister {
 	public function __construct ($h, $u, $p, $e){
 		include __DIR__."/../config/config.php";
+		$h = str_replace("boomlings", "www.boomlings", $h);
 		$url = $h."/accounts/registerGJAccount.php";
 		
 		$username = $u;

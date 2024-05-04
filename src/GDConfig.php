@@ -10,6 +10,7 @@ class GDConfig {
 	public function __construct ($a, $b = null, $c = null){
 		//Set Host GD
 		$this->host = $a;
+		$this->host = str_replace("boomlings", "www.boomlings", $this->host);
 		$this->username = $b;
 		$this->password = $c;
 		

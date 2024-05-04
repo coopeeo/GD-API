@@ -27,16 +27,12 @@ class GDProfile {
 		include __DIR__."/../config/config.php";
 		$tar = $a;
 		$host = $u;
+		$host = str_replace("boomlings", "www.boomlings", $host); // <- you have to use www for some reason, thanks rob!
 		$ch = curl_init ($host."/getGJUserInfo20.php");
 		curl_setopt ($ch, CURLOPT_POST, true);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
-		$debug = $_GET["debug"] == "true";
-		if ($debug) {
-			echo json_encode(["accept: */*", "content-type: application/x-www-form-urlencoded"]);
-			echo json_encode(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']);
-		}
 		if ($s == true){
 			if (curl_exec ($ch) == "1"){
 				echo "Not Found";

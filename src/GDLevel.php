@@ -23,6 +23,7 @@ class GDLevel {
 	
 	public function __construct ($h, $i, $n = null){
 		include __DIR__."/../config/config.php";
+		$h = str_replace("boomlings", "www.boomlings", $h);
 		$ch = curl_init();
 		curl_setopt ($ch, CURLOPT_URL, $h."/downloadGJLevel22.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);

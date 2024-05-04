@@ -9,6 +9,7 @@ class GDSong {
 	
 	public function __construct ($i2, $i, $s = null){
 		include __DIR__."/../config/config.php";
+		$i2 = str_replace("boomlings", "www.boomlings", $i2);
 		$host = $i2."/getGJSongInfo.php";
 		$ch = curl_init ($host);
 		$post["songID"] = $i;

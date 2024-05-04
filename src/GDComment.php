@@ -54,6 +54,7 @@ class GDComment {
 		$this->password = $p;
 		$udid = "S" . mt_rand(111111111,999999999) . mt_rand(111111111,999999999) . mt_rand(111111111,999999999) . mt_rand(111111111,999999999) . mt_rand(1,9); 
 		$sid = mt_rand(111111111,999999999) . mt_rand(11111111,99999999);
+		$this->host = str_replace("boomlings", "www.boomlings", $this->host); // <- you have to use www for some reason, thanks rob!
 		$ch = curl_init ();
 		curl_setopt ($ch, CURLOPT_URL, $this->host."/accounts/loginGJAccount.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
