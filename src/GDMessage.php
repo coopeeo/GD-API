@@ -102,11 +102,12 @@ class GDMessage {
 			} else {
 				$info = explode ("#", $res)[0];
 				$info = explode ("|", $info);
-					foreach ($info as $fetch){
-						if($fetch == "-2") return "debug this cause i don't remember if this would cancel out the whole function thingy yea";
-						$msg = explode (":", $fetch);
-						$arr[] = ["username" => $msg[1], "userID" => $msg[3], "accountID" => $msg[5], "msg" => array("subject" => str_replace ("☆", "", base64_decode ($msg[9])), "messageID" => $msg [7], "sentDate" => $msg[15])];
+					foreach ($info as $fetch) {
+						if($fetch == "-2") {
+							$msg = explode (":", $fetch);
+							$arr[] = ["username" => $msg[1], "userID" => $msg[3], "accountID" => $msg[5], "msg" => array("subject" => str_replace ("☆", "", base64_decode ($msg[9])), "messageID" => $msg [7], "sentDate" => $msg[15])];
 						}
+					}
 					return $arr;
 				}
 		}
