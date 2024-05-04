@@ -93,8 +93,8 @@ class GDConfig {
 		$postfields["password"] = $this->password;
 		$postfields["secret"] = "Wmfv3899gc9";
 		$postfields["gdw"] = 0;
-		$postfields["gameVersion"] = '22'
-		$postfields["binaryVersion"] = '35'
+		$postfields["gameVersion"] = '22';
+		$postfields["binaryVersion"] = '35';
 
 		
 		$ch = curl_init ($url);
@@ -109,8 +109,8 @@ class GDConfig {
 		include __DIR__."/../config/config.php";
 		$url = $this->getAccountURL();
 		$url = $url."/database/accounts/backupGJAccountNew.php";
-		$postfields["gameVersion"] = '22'
-		$postfields["binaryVersion"] = '35'
+		$postfields["gameVersion"] = '22';
+		$postfields["binaryVersion"] = '35';
 		$postfields["userName"] = $this->username; 
 		$postfields["accountID"] = $this->accountID;
 		$postfields["password"] = $this->password;
@@ -133,6 +133,8 @@ class GDConfig {
 		$postURL["accountID"] = $this->accountID;
 		$postURL["type"] = "2";
 		$postURL["secret"] = "Wmfd2893gb7";
+		$postURL["gameVersion"] = '22';
+		$postURL["binaryVersion"] = '35';
 		
 			
 		$ch = curl_init ($this->host."/getAccountURL.php");
