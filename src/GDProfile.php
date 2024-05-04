@@ -29,7 +29,8 @@ class GDProfile {
 		$host = $u;
 		$ch = curl_init ($host."/getGJUserInfo20.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["targetAccountID" => $tar, "secret" => $secret]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		if ($s == true){
 			if (curl_exec ($ch) == "1"){
 				echo "Not Found";
