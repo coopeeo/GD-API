@@ -13,8 +13,11 @@ class GDSong {
 		$ch = curl_init ($host);
 		$post["songID"] = $i;
 		$post["secret"] = $secret;
+		$post["gameVersion"] = '22';
+		$post["binaryVersion"] = '35';
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		if ($s == true){
 			if (curl_exec ($ch) == "-1" OR curl_exec ($ch) == ""){
 					echo "Not Found";
