@@ -36,7 +36,7 @@ class GDProfile {
 		$debug = $_GET["debug"] == "true";
 		if ($debug) {
 			echo json_encode(["accept: */*", "content-type: application/x-www-form-urlencoded"]);
-			echo http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']);
+			echo json_encode(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']);
 		}
 		if ($s == true){
 			if (curl_exec ($ch) == "1"){
