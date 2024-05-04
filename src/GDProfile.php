@@ -27,7 +27,8 @@ class GDProfile {
 		include __DIR__."/../config/config.php";
 		$tar = $a;
 		$host = $u;
-		$ch = curl_init ($host."/getGJUserInfo20.php");
+		$ch = curl_init ();
+		curl_setopt ($ch, CURLOPT_URL, $host."/getGJUserInfo20.php");
 		curl_setopt ($ch, CURLOPT_POST, true);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
