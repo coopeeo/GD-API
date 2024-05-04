@@ -26,7 +26,8 @@ class GDLevel {
 		$ch = curl_init();
 		curl_setopt ($ch, CURLOPT_URL, $h."/downloadGJLevel22.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["levelID" => $i, "secret" => $secret]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["levelID" => $i, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$info = explode (":", curl_exec ($ch));
 		
 		$this->fullString = curl_exec ($ch);
