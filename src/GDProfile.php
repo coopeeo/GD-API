@@ -33,7 +33,7 @@ class GDProfile {
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
-		$debug = $_POST["debug"] == "true";
+		$debug = $_GET["debug"] == "true";
 		if ($debug) {
 			echo json_encode(["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 			echo http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']);
