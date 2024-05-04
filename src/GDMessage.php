@@ -74,7 +74,8 @@ class GDMessage {
 		$sid = mt_rand(111111111,999999999) . mt_rand(11111111,99999999);
 		$ch = curl_init ($this->host."/accounts/loginGJAccount.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["udid" => $udid, "sID" => $sid,"userName" => $u, "password" => $p, "secret" => "Wmfv3899gc9"]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["udid" => $udid, "sID" => $sid,"userName" => $u, "password" => $p, "secret" => "Wmfv3899gc9", "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$res = curl_exec ($ch);
 		if ($res == "-1"){
 			include __DIR__."/Exception/GDErrors.php";
@@ -92,7 +93,8 @@ class GDMessage {
 		$url = $this->host."/getGJMessages20.php";
 		$ch = curl_init ($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["accountID" => $this->accID, "page" => $pgm, "getSent" => 0, "gjp" => self::$gjp, "secret" => $secret]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["accountID" => $this->accID, "page" => $pgm, "getSent" => 0, "gjp" => self::$gjp, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$res = curl_exec ($ch);
 		if ($res == "-1"){
 				return "Nothing here";
@@ -111,7 +113,8 @@ class GDMessage {
 		$url = $this->host."/downloadGJMessage20.php";
 		$ch = curl_init ($url);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["accountID" => $this->accID, "secret" => $secret, "gjp" => self::$gjp, "messageID" => $mk]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["accountID" => $this->accID, "secret" => $secret, "gjp" => self::$gjp, "messageID" => $mk, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		$res = curl_exec ($ch);
 		$info = explode (":", $res);
 		$message = $this->cipher (base64_decode($info[15]), 14251);
@@ -121,10 +124,11 @@ class GDMessage {
 	public function deleteMessage (int $o){
 		include __DIR__."/../config/config.php";
 		$messageID = $o;
-		$post = ["accountID" => $this->accID, "gjp" => self::$gjp, "messageID" => $messageID, "secret" => $secret];
+		$post = http_build_query(["accountID" => $this->accID, "gjp" => self::$gjp, "messageID" => $messageID, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']);
 		$ch = curl_init ($this->host."/deleteGJMessages20.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		echo curl_exec ($ch);
 		}
 	public function sendMessage (string $m, string $s, int $t){
@@ -137,7 +141,8 @@ class GDMessage {
 		$toAccount = $t;
 		$ch = curl_init ($this->host."/uploadGJMessage20.php");
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt ($ch, CURLOPT_POSTFIELDS, ["toAccountID" => $toAccount, "accountID" => $this->accID, "gjp" => self::$gjp, "body" => $message, "subject" => $subject, "secret" => $secret]);
+		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["toAccountID" => $toAccount, "accountID" => $this->accID, "gjp" => self::$gjp, "body" => $message, "subject" => $subject, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
+		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
 		return curl_exec ($ch);
 		}
 	}
