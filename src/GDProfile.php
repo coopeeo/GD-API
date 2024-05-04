@@ -42,7 +42,7 @@ class GDProfile {
 			}
 		$this->fullString = curl_exec ($ch);
 		$info = explode (":", curl_exec ($ch));
-		curl_close($curl);
+		curl_close($ch);
 		$this->userName = $info[1];
 		$this->usrID = $info[3];
 		$this->coins = $info[7];
