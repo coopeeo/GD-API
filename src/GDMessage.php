@@ -103,12 +103,10 @@ class GDMessage {
 				$info = explode ("#", $res)[0];
 				$info = explode ("|", $info);
 					foreach ($info as $fetch) {
-						if($fetch != "-2") {
-							$msg = explode (":", $fetch);
-							$arr[] = ["username" => $msg[1], "userID" => $msg[3], "accountID" => $msg[5], "msg" => array("subject" => str_replace ("☆", "", base64_decode ($msg[9])), "messageID" => $msg [7], "sentDate" => $msg[15])];
-						}
+						$msg = explode (":", $fetch);
+						$arr[] = ["username" => $msg[1], "userID" => $msg[3], "accountID" => $msg[5], "msg" => array("subject" => str_replace ("☆", "", base64_decode ($msg[9])), "messageID" => $msg [7], "sentDate" => $msg[15])];
 					}
-					return $arr;
+					return $info != "-2" ? $arr : [];
 				}
 		}
 	public function readMessage (int $mk){
