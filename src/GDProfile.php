@@ -28,6 +28,7 @@ class GDProfile {
 		$tar = $a;
 		$host = $u;
 		$ch = curl_init ($host."/getGJUserInfo20.php");
+		curl_setopt ($ch, CURLOPT_POST, true);
 		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(["targetAccountID" => $tar, "secret" => $secret, "gameVersion" => '22', "binaryVersion" => '35']));
 		curl_setopt ($ch, CURLOPT_HTTPHEADER, ["accept: */*", "content-type: application/x-www-form-urlencoded"]);
